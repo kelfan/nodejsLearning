@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- <link rel="stylesheet" href="./bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+</head>
+<body>
+<form method="post">
+	<div class="form-group">
+		<label for="texttitle">Title</label>
+	    <input class="form-control" type="text" id="texttitle">
+		<label for="textcontent">Example textarea</label>
+		<textarea class="form-control" id="textcontent" rows="3"></textarea>
+		<button type="submit" class="btn btn-primary" id="btn1">Submit</button>
+	</div>
+</form>
+<!-- <script src="./jquery.min.js"></script> -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btn1").click(function(e) {
+			e.preventDefault();
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:3000/json",
+				data:{
+					title: $('#texttitle').val(),
+					content: $('#textcontent').val(),
+					test: '123'
+				},
+				success:function(result) {
+					console.log(result)
+				},
+				error: function(result) {
+					console.log('error')
+				}
+			})
+		})
+	})
+</script>
+</body>
+</html>
