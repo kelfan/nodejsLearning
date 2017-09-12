@@ -1,0 +1,26 @@
+{
+	"actions": [
+      {
+        "description": "Default Welcome Intent",
+        "name": "MAIN",
+        "fulfillment": {
+          "conversationName": "testApp"
+        },
+        "intent": {
+          "name": "actions.intent.MAIN",
+          "trigger": {
+            "queryPatterns": [
+              "talk to any ideas"
+            ]
+          }
+        }
+      }
+    ],
+    "conversations": {
+      "testApp": {
+        "name": "testApp",
+        "url": "https://obnjzdpzlp.localtunnel.me"
+      }
+    }
+
+}
