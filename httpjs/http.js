@@ -4,6 +4,7 @@ const $ = require('jquery')
 const url = require('url')
 const querystring = require('querystring')
 const util = require('util')
+var greetings = require('./greetings.js');
 
 
 var filename = 'jsdb.json'
@@ -29,6 +30,7 @@ http.createServer(function (req, res) {
 		fs.readFile('./views/index.html', function(err, data) {
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write(data);
+			console.log(greetings.sayHelloInEnglish());
 			res.end();
 		});
 	}
