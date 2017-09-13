@@ -7,13 +7,12 @@ app.use(bodyparser.json())
 
 // GET method route
 app.all('/', function (req, res) {
-  	console.log('test get post');
+  	console.log('index.js/');
   	assistant.assistantHandler(req,res)
-  	console.log('test23');
 })
 
 app.all('/test', function(req,res) {
-	console.log('test');
+	console.log('index.js/test');
 	res.send('helloworld')
 })
 
