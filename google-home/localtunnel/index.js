@@ -1,7 +1,9 @@
 var express = require('express'),
 	app = express(),
 	bodyparser = require('body-parser'),
-	assistant = require('./assistant.js')
+	assistant = require('./assistant.js'),
+	fs = require('fs'),
+	util = require('util');
 app.use(bodyparser.json())
 
 
@@ -9,6 +11,11 @@ app.use(bodyparser.json())
 app.all('/', function (req, res) {
   	console.log('index.js/');
   	assistant.assistantHandler(req,res)
+  	fs.writeFile('req.js', util.inspect(req),function(err) {
+  		if (err) {
+  			throw err;
+  		}
+  	})
 })
 
 app.all('/test', function(req,res) {

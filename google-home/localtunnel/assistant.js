@@ -5,42 +5,39 @@ const permissions = require('./permission.js');
 
 
 exports.assistantHandler = (req, res) => {
+    console.log('assistantHandler');
     const app = new ActionsSdkApp({
         request: req,
         response: res
     });
+    var str = 'Sorry. I don\'t understand what you say';
+
+    if (app.isPermissionGranted()) {
+            var displayName = app.getUserName().displayName;
+            var deviceCoordinates = app.getDeviceLocation().coordinates;
+            console.log(deviceCoordinates);
+            voiceResponse('deviceCoordinates')
+    }
 
     // Create functions to handle requests here
     function mainIntent(app) {
     	console.log('assistant.js/mainIntent');
-    	permissions.permissionHandler(app)
-        let inputPrompt = app.buildInputPrompt(false,
-            'Hi! Say something',['what would you like','how is your day','what would you want']);
-        app.ask(inputPrompt);
-        if (app.isPermissionGranted()) {
-            var displayName = app.getUserName().displayName;
-            var deviceCoordinates = app.getDeviceLocation().coordinates;
-            console.log(displayName);
-        }
+        permissions.permissionHandler(app)
+        voiceResponse('welcome')
     }
 
     function respond(app) {
     	console.log('assistant.js/respond');
-		if (app.isPermissionGranted()) {
-			var displayName = app.getUserName().displayName;
-			var deviceCoordinates = app.getDeviceLocation().coordinates;
-			console.log(displayName);
-		}
 		
-		var str = 'Sorry. I don\'t understand what you say';
 		if (app.getRawInput() == 'hello') {
 			str = 'hello'
 		}
-        let inputPrompt = app.buildInputPrompt(false,
-            str);
-        app.ask(inputPrompt);
+        voiceResponse(str)
+    }
 
-        // console.log(app.getDeviceLocation().address);
+    function voiceResponse(strIn) {
+        let inputPrompt = app.buildInputPrompt(false,strIn);
+        app.ask(inputPrompt);
     }
 
     let actionMap = new Map();
@@ -49,3 +46,4 @@ exports.assistantHandler = (req, res) => {
 
     app.handleRequest(actionMap);
 }
+

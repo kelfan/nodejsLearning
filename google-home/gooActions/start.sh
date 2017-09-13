@@ -6,6 +6,7 @@ url=`cut -d "/" -f 3 url.txt`
 echo $url
 txt=`sed "s/\/[a-zA-Z0-9.]*\"/\/$url\"/1" <$file`
 echo $txt >$file
+sleep 2
 ./gactions update --action_package act.json --project rdrproject-176909
 # cd ..
 # cd localtunnel
